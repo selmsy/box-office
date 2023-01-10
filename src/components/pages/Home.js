@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
 import MainPageLayout from '../MainPageLayout'
 import {apiGet} from '../../misc/config'
+import ShowGrid from '../show/ShowGrid';
+import ActorGrid from '../actor/ActorGrid';
+
 
 const Home = () => {
   const [input, setInput] = useState('');
 const [results, setResults] = useState(null);
+const [searchOption, setSearchOption] = useState('shows');
+const isShowsSearch = searchOption === 'shows';
 
   const onSearch = () => {
-   apiGet(`/search/shows?q=${input}`).then(result => { 
+   apiGet(`/search/${searchOption}?q=${input}`).then(result => { 
       setResults(result);
       console.log(result);
     });
@@ -23,19 +28,18 @@ const onKeyDown = ev =>{
   }
 }
 
+const onRadioChange = (ev) => {
+setSearchOption(ev.target.value);
+}
+
 const renderResults = () => {
   if(results && results.length === 0){
 return <div>No results</div>
   }
-  if(results && results.length >0){
-return (
-<div>
-  {results.map(item=>
-<div key={item.show.id}>{item.show.name}</div>
-)}
+  if(results && results.length > 0){
+return results[0].show ? (<ShowGrid data={results}/> )
+ : (<ActorGrid data={results}/>)
 
-</div>
-)
   }
   return null;
 }
@@ -46,6 +50,17 @@ placeholder="Search for anything"
 onChange={onInputChange} 
 onKeyDown={onKeyDown} 
 value={input}/>
+
+<div>
+  <label htmlFor="shows-search">
+    Shows
+    <input  id="shows-search" type="radio" value="shows" checked={!isShowsSearch} onChange={onRadioChange}/>
+  </label>
+  <label htmlFor="actors-search">
+    Actors
+    <input id="actors-search" type="radio" value="people" checked={!isShowsSearch} onChange={onRadioChange}/>
+  </label>
+</div>
 <button type="button" onClick={onSearch}>Search</button>
 {renderResults()}
 </MainPageLayout>
