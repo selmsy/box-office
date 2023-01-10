@@ -18,7 +18,8 @@ const [results, setResults] = useState(null);
 setInput(ev.target.value);
 }
 const onKeyDown = ev =>{
-  if(ev.keyCode === 13){onSearch()
+  if(ev.keyCode === 13){
+    onSearch();
   }
 }
 
@@ -40,7 +41,11 @@ return (
 }
   return (
     <MainPageLayout>
-<input type="text" onChange={onInputChange} onKeyDown={onKeyDown} value={input}/>
+<input type="text" 
+placeholder="Search for anything" 
+onChange={onInputChange} 
+onKeyDown={onKeyDown} 
+value={input}/>
 <button type="button" onClick={onSearch}>Search</button>
 {renderResults()}
 </MainPageLayout>
