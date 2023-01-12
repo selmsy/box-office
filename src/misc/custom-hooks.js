@@ -98,7 +98,8 @@ export function useShow(showId) {
 }
 
 export function useWhyDidYouUpdate(name, props) {
-
+  // Get a mutable ref object where we can store props ...
+  // ... for comparison next time this hook runs.
   const previousProps = useRef();
 
   useEffect(() => {

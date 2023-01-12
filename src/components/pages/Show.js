@@ -1,11 +1,13 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
+
 //import {apiGet} from '../../misc/config';
 import Cast from '../show/Cast';
 import Details from '../show/Details';
 import Seasons from '../show/Seasons';
 import ShowMainData from '../show/ShowMainData';
-import { useShow } from '../../misc/custom-hooks';
+import { useShow} from '../../misc/custom-hooks';
+import {ShowPageWrapper, InfoBlock} from './Show.styled';
 
 
 
@@ -24,7 +26,7 @@ const Show = () => {
       }
     
       return (
-        <div>
+        <ShowPageWrapper>
           <ShowMainData
             image={show.image}
             name={show.name}
@@ -34,21 +36,21 @@ const Show = () => {
           />
          
     
-          <div>
+          <InfoBlock>
             <h2>Details</h2>
             <Details/>
-          </div>
+          </InfoBlock>
     
-          <div>
+          <InfoBlock>
             <h2>Seasons</h2>
             <Seasons/>
-          </div>
+          </InfoBlock>
     
           <div>
             <h2>Cast</h2>
             <Cast/>
           </div>
-        </div>
+        </ShowPageWrapper>
       );
     };
     
