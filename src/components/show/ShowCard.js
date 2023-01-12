@@ -2,8 +2,9 @@ import React from 'react'
 
 
 import { StyledShowCard } from './ShowCard.styled';
+import { Star } from '../styled';
 
-const ShowCard = ({ id, image, name, summary }) => {
+const ShowCard = ({ id, image, name, summary, onStarClick }) => {
     const summaryAsText = summary
       ? `${summary.split(' ').slice(0, 10).join(' ').replace(/<.+?>/g, "")}...`
       : 'No description';
@@ -20,7 +21,9 @@ const ShowCard = ({ id, image, name, summary }) => {
   
         <div className="btns">
           
-          <button type="button">Star me</button>
+          <button type="button" onClick={onStarClick}>
+            <Star/>
+            </button>
         </div>
       </StyledShowCard>
     );
